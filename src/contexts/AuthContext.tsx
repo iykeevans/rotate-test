@@ -4,7 +4,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 // import { useRouter } from "next/router";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 type User = {
   name: string;
@@ -30,9 +30,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
+  const publicPaths = ["/auth", "/callback"];
 
   useEffect(() => {
     const fetchUser = async () => {
+      console.log(pathname);
       try {
         const storedAccessToken = localStorage.getItem("accessToken");
 
@@ -42,7 +45,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           const userData = await verifyUser(storedAccessToken);
           setUser(userData);
         } else {
-          router.push("/auth");
+          if (!publicPaths.includes(pathname)) {
+            router.push("/auth");
+          }
         }
       } catch (error) {
         console.error("Error fetching user:", error);
