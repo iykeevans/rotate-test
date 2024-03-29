@@ -22,10 +22,14 @@ const Callback = () => {
   return <div>Loading...</div>;
 };
 
+const Loading = () => <div>Loading..</div>;
+
 const SuspensedCallback = () => {
-  <Suspense>
-    <Callback />
-  </Suspense>;
+  return (
+    <Suspense fallback={<Loading />}>
+      <Callback />
+    </Suspense>
+  );
 };
 
 export default SuspensedCallback;
