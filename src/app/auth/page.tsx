@@ -1,23 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { LinkIcon } from "@chakra-ui/icons";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
+import { useSearchParams } from "next/navigation";
 
 const Auth = () => {
-  const baseUrl = "https://api.stg.withrotate.com/api";
+  const { login } = useAuth();
 
-  const handleAuthenticate = async () => {
-    if (typeof window !== "undefined") {
-      const redirectUri = `${window.location.origin}/callback`;
-
-      window.location.replace(
-        `${baseUrl}/auth/oauth_authorize?redirect_uri=${redirectUri}`
-      );
-    }
-  };
+  const redirectUri = () => `${window.location.origin}/callback`;
 
   return (
     <main>
@@ -39,7 +33,7 @@ const Auth = () => {
           <Button
             width="90%"
             border="1px solid #ccc"
-            onClick={handleAuthenticate}
+            onClick={() => login(redirectUri())}
           >
             Authenticate
           </Button>
