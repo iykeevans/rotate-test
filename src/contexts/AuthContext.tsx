@@ -3,8 +3,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
-import { redirect } from "next/navigation";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type User = {
   name: string;
@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  //   const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -41,6 +41,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setAccessToken(storedAccessToken);
           const userData = await verifyUser(storedAccessToken);
           setUser(userData);
+        } else {
+          router.push("/auth");
         }
       } catch (error) {
         console.error("Error fetching user:", error);
