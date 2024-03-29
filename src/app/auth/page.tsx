@@ -8,12 +8,15 @@ import Image from "next/image";
 
 const Auth = () => {
   const baseUrl = "https://api.stg.withrotate.com/api";
-  const redirectUri = `${window.location.origin}/callback`;
 
   const handleAuthenticate = async () => {
-    window.location.replace(
-      `${baseUrl}/auth/oauth_authorize?redirect_uri=${redirectUri}`
-    );
+    if (typeof window !== "undefined") {
+      const redirectUri = `${window.location.origin}/callback`;
+
+      window.location.replace(
+        `${baseUrl}/auth/oauth_authorize?redirect_uri=${redirectUri}`
+      );
+    }
   };
 
   return (
