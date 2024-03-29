@@ -14,7 +14,7 @@ interface IProps<C, D> {
   columns: C;
 }
 
-const Table = <C extends ColumnDef<any, any>[], D extends unknown[]>(
+const Table = <C extends ColumnDef<unknown, any>[], D extends unknown[]>(
   props: IProps<C, D>
 ) => {
   const { data, columns } = props;
