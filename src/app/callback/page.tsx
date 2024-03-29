@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Callback = () => {
-  // collect code
-  // set to storage
-  // redirect to settings page
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const { handleAuthCallback } = useAuth();
@@ -25,4 +22,10 @@ const Callback = () => {
   return <div>Loading...</div>;
 };
 
-export default Callback;
+const SuspensedCallback = () => {
+  <Suspense>
+    <Callback />
+  </Suspense>;
+};
+
+export default SuspensedCallback;
