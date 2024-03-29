@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
-import axios from "axios";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { LinkIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSearchParams } from "next/navigation";
 
 const Auth = () => {
   const { login } = useAuth();

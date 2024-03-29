@@ -3,6 +3,7 @@
 import React, { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import Spinner from "@/components/spinner";
 
 const Callback = () => {
   const searchParams = useSearchParams();
@@ -19,7 +20,7 @@ const Callback = () => {
     })();
   }, []);
 
-  return <div>Loading...</div>;
+  return <Spinner />;
 };
 
 const Loading = () => <div>Loading..</div>;

@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-type User = {
+export type User = {
   user_id: string;
   email: string;
   name: string;
@@ -72,14 +72,22 @@ type OrgData = {
   lifecycle_events: any[];
 };
 
+export type UpdateProfile = {
+  company_name: string;
+  contact_name: string;
+  contact_email: string;
+  industry: string;
+  company_logo_b64: string;
+};
+
 export const getUsers = () => {
-  return axiosInstance.get<User>("/user_management/list_users");
+  return axiosInstance.get<User[]>("/user_management/list_users");
 };
 
 export const getOrgDetails = () => {
   return axiosInstance.get<OrgData>("/org_management/get_org_data");
 };
 
-export const updateOrgDetails = (data: any) => {
-  return axiosInstance.put("/org_management/update_profile", data);
+export const updateOrgDetails = (data: UpdateProfile) => {
+  return axiosInstance.put<OrgData>("/org_management/update_profile", data);
 };
