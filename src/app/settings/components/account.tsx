@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { getOrgDetails, updateOrgDetails } from "@/services";
 import UploadInput from "@/components/upload-input";
+import Spinner from "@/components/spinner";
 
 const Account = () => {
   const [orgDetails, setOrgDetails] = useState({
@@ -44,8 +45,6 @@ const Account = () => {
     })();
   }, []);
 
-  if (isLoading) return <div>Loading....</div>;
-
   const handleChange = (key: string, value: string) => {
     setOrgDetails((state) => ({ ...state, [key]: value }));
   };
@@ -61,6 +60,13 @@ const Account = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (isLoading)
+    return (
+      <Box>
+        <Spinner />
+      </Box>
+    );
 
   return (
     <Box

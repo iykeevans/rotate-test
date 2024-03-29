@@ -3,7 +3,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-// import { useRouter } from "next/router";
 import { useRouter, usePathname } from "next/navigation";
 
 type User = {
@@ -35,7 +34,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const fetchUser = async () => {
-      console.log(pathname);
       try {
         const storedAccessToken = localStorage.getItem("accessToken");
 
