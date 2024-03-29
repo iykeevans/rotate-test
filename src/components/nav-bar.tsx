@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { Flex, Box, Text, Container, Button } from "@chakra-ui/react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const NavBar = () => {
-  const isAuthenticated = false;
+  const { user, isLoadingUser } = useAuth();
 
   return (
     <Box as="header">
@@ -19,19 +22,22 @@ const NavBar = () => {
           <Flex alignItems="center" columnGap="3">
             <Box>
               <Text fontWeight="medium" as="div">
-                Theodore Winters
+                {user?.name}
               </Text>
               <Text fontSize="14px" as="div" mt="-1">
-                twinters@gmail.com
+                {user?.email}
               </Text>
             </Box>
 
-            <Image
-              src="/images/avatar.jpg"
-              alt="avatar"
-              height={40}
-              width={40}
-            />
+            {!isLoadingUser && (
+              <Image
+                src={user?.picture as string}
+                alt="avatar"
+                height={40}
+                width={40}
+                style={{ borderRadius: "100%" }}
+              />
+            )}
           </Flex>
         </Flex>
       </Container>

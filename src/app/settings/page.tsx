@@ -3,19 +3,10 @@
 import Icon from "@/components/icon";
 import Table from "@/components/table";
 import UserTable from "@/components/user-table";
-import {
-  Box,
-  Flex,
-  Container,
-  Text,
-  Input,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Container, Text } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useState } from "react";
+import Account from "./components/account";
 
 type User = {
   name: string;
@@ -96,140 +87,7 @@ export default function Settings() {
             ))}
           </Flex>
 
-          {selectedTab === 1 && (
-            <Box
-              bg="white"
-              rounded="24px"
-              border="1px solid rgba(202, 206, 225, 0.2)"
-              px="8"
-              pt="4"
-              pb="14"
-            >
-              <Text
-                as="h2"
-                fontSize="20px"
-                fontWeight="500"
-                borderBottom="solid"
-                borderBottomColor="#AEADBE"
-                borderBottomWidth="0.3px"
-                pb="3"
-                mb="7"
-              >
-                Account
-              </Text>
-
-              <FormControl width="50%" mb="5">
-                <FormLabel
-                  color="#5D5F6D"
-                  fontSize="13px"
-                  mb="1.5"
-                  fontWeight={400}
-                >
-                  Company name
-                </FormLabel>
-                <Input
-                  type="text"
-                  bg="#FCFCFE"
-                  border="1px solid rgba(94, 109, 250, 0.1)"
-                  height={42}
-                />
-              </FormControl>
-
-              <FormControl width="50%" mb="5">
-                <FormLabel
-                  color="#5D5F6D"
-                  fontSize="13px"
-                  mb="1.5"
-                  fontWeight={400}
-                >
-                  Contact name
-                </FormLabel>
-                <Input
-                  type="text"
-                  bg="#FCFCFE"
-                  border="1px solid rgba(94, 109, 250, 0.1)"
-                  height={42}
-                />
-              </FormControl>
-
-              <FormControl width="50%" mb="5">
-                <FormLabel
-                  color="#5D5F6D"
-                  fontSize="13px"
-                  mb="1.5"
-                  fontWeight={400}
-                >
-                  Email
-                </FormLabel>
-                <Input
-                  type="text"
-                  bg="#FCFCFE"
-                  border="1px solid rgba(94, 109, 250, 0.1)"
-                  height={42}
-                />
-              </FormControl>
-
-              <FormControl width="50%" mb="5">
-                <FormLabel
-                  color="#5D5F6D"
-                  fontSize="13px"
-                  mb="1.5"
-                  fontWeight={400}
-                >
-                  Industry
-                </FormLabel>
-                <Input
-                  type="text"
-                  bg="#FCFCFE"
-                  border="1px solid rgba(94, 109, 250, 0.1)"
-                  height={42}
-                />
-              </FormControl>
-
-              <Text fontSize={13} color="#5D5F6D" mb="1.5">
-                Company Logo
-              </Text>
-
-              <Box
-                border="1px solid rgba(94, 109, 250, 0.3)"
-                rounded="8px"
-                width="50%"
-                px="5"
-                py="4"
-                mb="7"
-              >
-                <Flex alignItems="center" columnGap="2.5">
-                  <Box position="relative">
-                    <Icon
-                      name="upload-clip"
-                      style={{
-                        fill: "none",
-                        width: 20,
-                        position: "absolute",
-                        right: 0,
-                      }}
-                    />
-                    <Icon name="upload" style={{ fill: "none", width: 64 }} />
-                  </Box>
-
-                  <Text fontSize={10} color="#5E6DFA">
-                    Upload company logo
-                  </Text>
-                </Flex>
-              </Box>
-
-              <Button
-                border="1px solid #5E6DFA"
-                bg="white"
-                rounded="30px"
-                fontSize={10}
-                height={27}
-                color="#5E6DFA"
-              >
-                Save changes
-              </Button>
-            </Box>
-          )}
+          {selectedTab === 1 && <Account />}
 
           {selectedTab === 2 && (
             <Box
