@@ -24,7 +24,7 @@ type User = {
   lastActive: string;
 };
 
-export default function Home() {
+export default function Settings() {
   const columnHelper = createColumnHelper<User>();
 
   const columns = [
