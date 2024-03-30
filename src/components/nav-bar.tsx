@@ -1,11 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { Flex, Box, Text, Container, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Text,
+  Container,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import { useAuth } from "@/contexts/AuthContext";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
-  const { user, isLoadingUser } = useAuth();
+  const { user, isLoadingUser, logout } = useAuth();
+  const router = useRouter();
 
   return (
     <Box as="header">
@@ -19,26 +31,45 @@ const NavBar = () => {
         >
           <Image src="/images/logo.png" alt="logo" width={150} height={28} />
 
-          <Flex alignItems="center" columnGap="3">
-            <Box>
-              <Text fontWeight="medium" as="div">
-                {user?.name}
-              </Text>
-              <Text fontSize="14px" as="div" mt="-1">
-                {user?.email}
-              </Text>
-            </Box>
+          <Menu>
+            <MenuButton>
+              <Flex alignItems="center" justifyContent="start" columnGap="3">
+                <Box>
+                  <Text fontWeight="medium" as="div" textAlign="start">
+                    {user?.name}
+                  </Text>
+                  <Text fontSize="14px" as="div" mt="-1" textAlign="start">
+                    {user?.email}
+                  </Text>
+                </Box>
 
-            {!isLoadingUser && (
-              <Image
-                src={user?.picture as string}
-                alt="avatar"
-                height={40}
-                width={40}
-                style={{ borderRadius: "100%" }}
-              />
-            )}
-          </Flex>
+                {!isLoadingUser && (
+                  <Image
+                    src={user?.picture as string}
+                    alt="avatar"
+                    height={40}
+                    width={40}
+                    style={{ borderRadius: "100%" }}
+                  />
+                )}
+
+                {!isLoadingUser && <ChevronDownIcon />}
+              </Flex>
+            </MenuButton>
+
+            <MenuList>
+              <MenuItem
+                onClick={() => {
+                  logout();
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 500);
+                }}
+              >
+                Log out
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Container>
     </Box>
