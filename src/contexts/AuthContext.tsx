@@ -81,6 +81,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleAuthCallback = async (code: string) => {
     try {
+      setIsLoadingUser(true);
+
       const response = await axios.post<{ access_token: string }>(
         `https://api.stg.withrotate.com/api/auth/oauth_token`,
         { code }
@@ -94,6 +96,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setAccessToken(access_token);
     } catch (error: any) {
       console.error("Error during auth callback:", error);
+    } finally {
+      setIsLoadingUser(false);
     }
   };
 
