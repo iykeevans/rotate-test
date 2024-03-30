@@ -9,6 +9,7 @@ import {
   FormLabel,
   Input,
   Button,
+  Select,
 } from "@chakra-ui/react";
 import { getOrgDetails, updateOrgDetails } from "@/services";
 import UploadInput from "@/components/upload-input";
@@ -60,6 +61,14 @@ const Account = () => {
       setIsSubmitting(false);
     }
   };
+
+  const industryOptions = [
+    "Healthcare and Pharmaceuticals",
+    "Information Technology (IT) and Software Services",
+    "Finance and Banking",
+    "Retail and Consumer Goods",
+    "Manufacturing and Industrial Production",
+  ];
 
   if (isLoading)
     return (
@@ -138,14 +147,19 @@ const Account = () => {
           Industry
         </FormLabel>
 
-        <Input
-          type="text"
+        <Select
           bg="#FCFCFE"
           border="1px solid rgba(94, 109, 250, 0.1)"
           height={42}
           value={orgDetails?.industry}
           onChange={(e) => handleChange("industry", e.target.value)}
-        />
+        >
+          {industryOptions.map((industry) => (
+            <option value={industry} key={industry}>
+              {industry}
+            </option>
+          ))}
+        </Select>
       </FormControl>
 
       <Text fontSize={13} color="#5D5F6D" mb="1.5">
